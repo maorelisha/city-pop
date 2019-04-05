@@ -1,4 +1,16 @@
 import React, { Component } from "react";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBIcon,
+  MDBCardHeader,
+  MDBBtn,
+  MDBInput
+} from "mdbreact";
+import "../css/login.css";
 
 export default class Login extends Component {
   constructor(props) {
@@ -7,23 +19,29 @@ export default class Login extends Component {
     this.updateUserValue = this.updateUserValue.bind(this);
     this.updatePasswordValue = this.updatePasswordValue.bind(this);
     this.users = [
-      { user: "maor", password: "123456" },
-      { user: "daniel", password: "test" }
+      { user: "maor", password: "123456", city: "חולון" },
+      { user: "daniel", password: "test", city: "ראשון לציון" }
     ];
     this.state = {
       user: "",
-      password: ""
+      password: "",
+      incPass: false
     };
   }
 
   checkLogin() {
     this.users.forEach(currUser => {
       if (
-        currUser.user == this.state.user &&
-        currUser.password == this.state.password
+        currUser.user === this.state.user &&
+        currUser.password === this.state.password
       ) {
         this.props.handler(currUser);
+        return;
       }
+    });
+    this.setState({
+      ...this.state,
+      incPass: true
     });
   }
 
@@ -42,22 +60,61 @@ export default class Login extends Component {
   }
 
   render() {
+    const IncPass = () => {
+      if (this.state.incPass) {
+        return <p>incorrect user or password!</p>;
+      }
+      return null;
+    };
     return (
-      <div>
-        <div className="container">
-          <input
-            type="text"
-            name="user"
-            id="user"
-            onChange={this.updateUserValue}
-          />
-          <input
-            type="text"
-            name="password"
-            id="password"
-            onChange={this.updatePasswordValue}
-          />
-          <button onClick={this.checkLogin}>Login</button>
+      <div className="main">
+        <div className="wrapper">
+          <MDBContainer>
+            <MDBRow>
+              <MDBCol md="6" className="offset-3">
+                <MDBCard>
+                  <MDBCardBody>
+                    <MDBCardHeader className="form-header purple-gradient rounded">
+                      <h3 className="my-3">
+                        <MDBIcon icon="lock" /> CityPop Login:
+                      </h3>
+                    </MDBCardHeader>
+                    <form>
+                      <div className="grey-text">
+                        <MDBInput
+                          label="Type your user"
+                          icon="user"
+                          group
+                          type="text"
+                          validate
+                          onChange={this.updateUserValue}
+                        />
+                        <MDBInput
+                          label="Type your password"
+                          icon="lock"
+                          group
+                          type="password"
+                          validate
+                          onChange={this.updatePasswordValue}
+                        />
+                      </div>
+                      <IncPass />
+                      <div className="text-center mt-4">
+                        <MDBBtn
+                          color="blue"
+                          className="mb-3"
+                          onClick={this.checkLogin}
+                          type="submit"
+                        >
+                          Login
+                        </MDBBtn>
+                      </div>
+                    </form>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
         </div>
       </div>
     );

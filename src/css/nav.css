@@ -1,6 +1,17 @@
 .nav {
   height: 50px;
-  background-color: rgb(97, 17, 172);
+  background-color: rgb(119, 19, 212);
+}
+
+.log-out-btn {
+  background-color: #3e0146;
+  color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 50px;
+  margin-right: 70px;
+  border: 0;
 }
 
 .brand {
@@ -24,7 +35,7 @@
   color: white;
   text-decoration: none;
 }
-.bm-burger-bars-hover button:focus,
+button:focus,
 a:focus {
   outline: 0;
 }
@@ -51,12 +62,14 @@ a:focus {
   text-decoration: none;
   margin-bottom: 10px;
   color: #d1d1d1;
-  transition: color 0.2s;
+  transition: color 0.5s;
+  transition: background-color 0.5s;
 }
 
 /* Change color on hover */
 .bm-item:hover {
   color: white;
+  background-color: #4a4b53;
 }
 
 /* The rest copied directly from react-burger-menu docs */

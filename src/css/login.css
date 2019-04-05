@@ -1,0 +1,23 @@
+html,
+body {
+  height: 100%;
+}
+.main {
+}
+
+.wrapper {
+}
+
+h3 {
+  color: white;
+  text-align: center;
+}
+
+.btn-blue {
+  background-color: rgb(184, 108, 247) !important;
+}
+
+p {
+  color: purple;
+  text-align: center;
+}

@@ -4,14 +4,20 @@ import MapComponent from "../components/MapComponent";
 import Nav from "../components/Nav";
 
 export default class AppPage extends Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    console.log(this.props.city);
+  }
   render() {
     return (
       <div>
         <div>
           <BrowserRouter>
             <div className="App">
-              <Nav />
-              <MapComponent />
+              <Nav handler={this.props.handler} />
+              <MapComponent city={this.props.city} />
             </div>
           </BrowserRouter>
         </div>

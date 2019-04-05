@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = { isLoggedIn: false, user: "" };
+    this.state = { isLoggedIn: false, user: {} };
   }
 
   handleLoginClick(user) {
@@ -20,14 +20,14 @@ class App extends Component {
   }
 
   handleLogoutClick() {
-    this.setState({ isLoggedIn: false });
+    this.setState({ ...this.state, isLoggedIn: false });
   }
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
-
+    console.log(this.state.user.city);
     return isLoggedIn ? (
-      <AppPage handler={this.handleLogoutClick} />
+      <AppPage handler={this.handleLogoutClick} city={this.state.user.city} />
     ) : (
       <Login handler={this.handleLoginClick} />
     );

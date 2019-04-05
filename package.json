@@ -2,14 +2,18 @@
   "name": "city-pop-roei",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://maorelisha.github.io/city-pop",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "firebase": "^5.9.2",
+    "gh-pages": "^2.0.1",
     "google-maps-react": "^2.0.2",
+    "mdbreact": "^4.12.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-burger-menu": "^2.6.7",
     "react-dom": "^16.8.6",
+    "react-image-magnify": "^2.7.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
@@ -17,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
