@@ -1,0 +1,38 @@
+.note-img {
+  height: 300px;
+}
+
+.note-item * {
+}
+
+.note-item:hover {
+  background-color: rgb(226, 226, 226);
+}
+
+.note-address {
+  font-size: 25px !important;
+}
+
+.note-status {
+  padding-top: 20px;
+  color: rgb(131, 131, 131) !important;
+}
+
+.note-date {
+  padding-top: 20px;
+  color: rgb(131, 131, 131) !important;
+}
+
+.column1 {
+  width: 50%;
+  text-align: right;
+}
+
+.column3 {
+  width: 25%;
+  text-align: right;
+}
+.column2 {
+  width: 25%;
+  text-align: right;
+}

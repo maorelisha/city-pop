@@ -17,16 +17,16 @@ export default class Nav extends Component {
     return (
       <div className="nav">
         <Menu>
-          <Link to="/" className="menu-item">
+          <Link to="/AllReports" className="menu-item">
             All reports
           </Link>
-          <Link to="/" className="menu-item">
+          <Link to="/OpenReports" className="menu-item">
             Open reports
           </Link>
-          <Link to="/" className="menu-item">
+          <Link to="/TreatReports" className="menu-item">
             In Treat
           </Link>
-          <Link to="/" className="menu-item">
+          <Link to="/ClosedReports" className="menu-item">
             Closed reports
           </Link>
         </Menu>
@@ -35,7 +35,7 @@ export default class Nav extends Component {
         </Link>
 
         <button className="log-out-btn" onClick={this.logOut}>
-          <i class="fas fa-sign-out-alt" /> {""}Sign Out
+          <i className="fas fa-sign-out-alt" /> {""}Sign Out
         </button>
       </div>
     );
