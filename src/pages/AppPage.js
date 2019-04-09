@@ -3,10 +3,6 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Nav from "../components/Nav";
 import MapComponent from "../components/MapComponent";
 import AllReports from "./AllReports";
-import ClosedReports from "./ClosedReports";
-import TreatReports from "./TreatReports";
-import OpenReports from "./OpenReports";
-import "../css/appPage.css";
 
 export default class AppPage extends Component {
   // constructor(props) {
@@ -27,11 +23,28 @@ export default class AppPage extends Component {
               />
               <Route
                 path="/AllReports"
-                component={() => <AllReports city={this.props.city} />}
+                component={() => (
+                  <AllReports city={this.props.city} status="all" />
+                )}
               />
-              <Route path="/TreatReports" component={TreatReports} />
-              <Route path="/OpenReports" component={OpenReports} />
-              <Route path="/ClosedReports" component={ClosedReports} />
+              <Route
+                path="/TreatReports"
+                component={() => (
+                  <AllReports city={this.props.city} status="treat" />
+                )}
+              />
+              <Route
+                path="/OpenReports"
+                component={() => (
+                  <AllReports city={this.props.city} status="open" />
+                )}
+              />
+              <Route
+                path="/ClosedReports"
+                component={() => (
+                  <AllReports city={this.props.city} status="done" />
+                )}
+              />
             </Switch>
           </div>
         </BrowserRouter>

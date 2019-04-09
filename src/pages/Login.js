@@ -71,7 +71,7 @@ export default class Login extends Component {
         <div className="wrapper">
           <MDBContainer>
             <MDBRow>
-              <MDBCol md="6" className="offset-3">
+              <MDBCol md="6" className="offset-md-3">
                 <MDBCard>
                   <MDBCardBody>
                     <MDBCardHeader className="form-header purple-gradient rounded">

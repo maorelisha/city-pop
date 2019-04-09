@@ -2,7 +2,10 @@
   height: 300px;
 }
 
-.note-item * {
+@media (max-width: 720px) {
+  .note-img {
+    height: 80%;
+  }
 }
 
 .note-item:hover {
@@ -35,4 +38,28 @@
 .column2 {
   width: 25%;
   text-align: right;
+}
+
+.status-box {
+  width: 35%;
+  min-width: 58px;
+  max-width: 90px;
+  height: 30px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  float: right;
+  margin-right: 20px;
+  padding-bottom: 20px;
+  border-radius: 4px;
+}
+.status-text {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+}
+@media (max-width: 720px) {
+  .status-box {
+    margin: 0;
+  }
 }

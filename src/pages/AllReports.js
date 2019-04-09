@@ -15,11 +15,22 @@ export default class AllReports extends Component {
   componentWillMount() {
     db.ref("CityPopSERVER/Notes").on("value", notes => {
       notes = Object.values(notes.val());
-
       this.setState({
         ...this.state,
         notes: notes
-          .filter(note => note.fullAddress.includes(this.props.city))
+          .filter(note => {
+            if (
+              (this.props.status === "all" &&
+                note.fullAddress &&
+                note.fullAddress.includes(this.props.city)) ||
+              (note.fullAddress &&
+                note.fullAddress.includes(this.props.city) &&
+                note.status &&
+                note.status.includes(this.props.status))
+            )
+              return true;
+            else return false;
+          })
           .sort(function(a, b) {
             a = a.openingDate
               .split(".")
@@ -33,7 +44,6 @@ export default class AllReports extends Component {
           })
       });
     });
-    console.log(this.state.notes);
   }
 
   handleChange = panel => (event, expanded) => {
@@ -45,10 +55,11 @@ export default class AllReports extends Component {
   getAllReports() {
     const reports = [];
     const status = { open: "פתוח", treat: "בטיפול", done: "סגור" };
-    const statusColor = { open: "red", treat: "#f2e100", done: "#00cf00" };
+    const statusColor = { open: "#dc3545", treat: "#ffc107", done: "#28a745" };
     this.state.notes.forEach((note, index) =>
       reports.push(
         <ExpansionPanel
+          key={note.noteUid}
           expanded={this.state.expanded === "panel" + index}
           onChange={this.handleChange("panel" + index)}
         >
@@ -62,11 +73,13 @@ export default class AllReports extends Component {
               &nbsp;&nbsp; {note.openingTime}
             </Typography>
             <Typography className={"note-status column3"}>
-              סטטוס:{" "}
+              <span style={{ float: "right" }}> סטטוס: </span>
+
               <span
-                style={{ color: statusColor[note.status], fontSize: "20px" }}
+                className="status-box"
+                style={{ backgroundColor: statusColor[note.status] }}
               >
-                {status[note.status]}
+                <span className="status-text">{status[note.status]}</span>
               </span>
             </Typography>
           </ExpansionPanelSummary>
@@ -81,6 +94,10 @@ export default class AllReports extends Component {
   }
 
   render() {
-    return <div dir="rtl">{this.getAllReports()}</div>;
+    return (
+      <div className="container">
+        <div dir="rtl">{this.getAllReports()}</div>
+      </div>
+    );
   }
 }

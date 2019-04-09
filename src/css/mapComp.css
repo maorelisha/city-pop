@@ -5,3 +5,16 @@
 h6 {
   color: rgb(170, 170, 170);
 }
+
+.map {
+  height: calc(100% - 50px) !important;
+}
+
+.zoomed-image-container {
+  z-index: 1;
+  direction: ltr;
+}
+.rtl .zoomed-image-container {
+  left: 0% !important;
+  right: 100% !important;
+}

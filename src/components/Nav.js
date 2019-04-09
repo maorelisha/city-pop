@@ -7,6 +7,17 @@ export default class Nav extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
+    this.state = {
+      menuOpen: false
+    };
+  }
+
+  handleStateChange(state) {
+    this.setState({ menuOpen: state.isOpen });
+  }
+
+  closeMenu() {
+    this.setState({ menuOpen: false });
   }
 
   logOut() {
@@ -16,17 +27,39 @@ export default class Nav extends Component {
   render() {
     return (
       <div className="nav">
-        <Menu>
-          <Link to="/AllReports" className="menu-item">
+        <Menu
+          isOpen={this.state.menuOpen}
+          onStateChange={state => this.handleStateChange(state)}
+        >
+          <Link to="/" className="menu-item" onClick={() => this.closeMenu()}>
+            Map
+          </Link>
+          <Link
+            to="/AllReports"
+            className="menu-item"
+            onClick={() => this.closeMenu()}
+          >
             All reports
           </Link>
-          <Link to="/OpenReports" className="menu-item">
+          <Link
+            to="/OpenReports"
+            className="menu-item"
+            onClick={() => this.closeMenu()}
+          >
             Open reports
           </Link>
-          <Link to="/TreatReports" className="menu-item">
+          <Link
+            to="/TreatReports"
+            className="menu-item"
+            onClick={() => this.closeMenu()}
+          >
             In Treat
           </Link>
-          <Link to="/ClosedReports" className="menu-item">
+          <Link
+            to="/ClosedReports"
+            className="menu-item"
+            onClick={() => this.closeMenu()}
+          >
             Closed reports
           </Link>
         </Menu>

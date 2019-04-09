@@ -4,6 +4,8 @@ import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
 import ReactImageMagnify from "react-image-magnify";
 import "../css/mapComp.css";
 import detective from "../icons/detective.png";
+import ImageZoom from "react-medium-image-zoom";
+
 class MapComponent extends Component {
   // constructor(props) {
   //   super(props);
@@ -16,26 +18,37 @@ class MapComponent extends Component {
     selectedPlace: {}
   };
 
+  componentDidMount() {
+    db.ref("CityPopSERVER/Notes").on("value", notes => {
+      notes = Object.values(notes.val());
+      this.setState({
+        ...this.state,
+        notes: notes.filter(
+          note =>
+            this.props.city &&
+            note.fullAddress.includes(this.props.city) &&
+            note.status !== "done"
+        )
+      });
+    });
+  }
+
   componentWillMount() {
     db.ref("CityPopSERVER/Notes").on("value", notes => {
       notes = Object.values(notes.val());
 
       this.setState({
-        ...this.state,
-        notes: notes.filter(
-          note =>
-            note.fullAddress.includes(this.props.city) && note.status !== "done"
-        )
+        ...this.state
       });
     });
 
     db.ref("CityPopSERVER/inspector").on("value", inspectors => {
       inspectors = Object.values(inspectors.val());
-      console.log(inspectors);
       this.setState({
         ...this.state,
-        inspectors: inspectors.filter(inspector =>
-          inspector.city.includes(this.props.city)
+        inspectors: inspectors.filter(
+          inspector =>
+            this.props.city && inspector.city.includes(this.props.city)
         )
       });
     });
@@ -60,6 +73,7 @@ class MapComponent extends Component {
                 }
               : undefined
           }
+          zIndex={note.status === "treat" ? 99999999 : undefined}
         />
       );
     });
@@ -75,7 +89,7 @@ class MapComponent extends Component {
           onClick={this.onMarkerClick}
           address={inspector.fullAddress}
           name={inspector.Inspector_Name}
-          key={inspector.noteUid}
+          key={inspector.Inspector_Name}
           time={inspector.time}
           position={{ lat: inspector.latitude, lng: inspector.longtitude }}
           icon={detective}
@@ -110,7 +124,8 @@ class MapComponent extends Component {
           lat: 32.01578078,
           lng: 34.77309091
         }}
-        zoom={10}
+        zoom={12}
+        className="map"
       >
         {this.getMarkers()}
         {this.getInspectors()}
@@ -118,27 +133,26 @@ class MapComponent extends Component {
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
         >
-          <div>
-            <h4>
-              {this.state.selectedPlace.title
-                ? this.state.selectedPlace.title
-                : this.state.selectedPlace.name}
-            </h4>
-            <h6>{this.state.selectedPlace.address}</h6>
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  src: this.state.selectedPlace.img,
-                  isFluidWidth: true
-                },
-                largeImage: {
-                  src: this.state.selectedPlace.img,
-                  width: 200,
-                  height: 200
-                }
-              }}
-            />
-          </div>
+          <h4>
+            {this.state.selectedPlace.title
+              ? this.state.selectedPlace.title
+              : this.state.selectedPlace.name}
+          </h4>
+          <h6>{this.state.selectedPlace.address}</h6>
+
+          <ReactImageMagnify
+            {...{
+              smallImage: {
+                src: this.state.selectedPlace.img || "",
+                isFluidWidth: true
+              },
+              largeImage: {
+                src: this.state.selectedPlace.img || "",
+                width: 200,
+                height: 200
+              }
+            }}
+          />
         </InfoWindow>
       </Map>
     );
