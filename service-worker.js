@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/city-pop/precache-manifest.52fca23747611fea84a1a7c8445fff03.js"
+  "/city-pop/precache-manifest.bb323b8f949b8a0cb69e1de0080ed06f.js"
 );
 
 workbox.clientsClaim();
